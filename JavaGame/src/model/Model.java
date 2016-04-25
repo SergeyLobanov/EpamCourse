@@ -23,7 +23,7 @@ public class Model {
     public int rand(int min, int max) {
         Random random = new Random();
         userAttempts = new LinkedList<>();
-        randomValue = random.nextInt(max - min) + min + 1;
+        randomValue = random.nextInt(max - min + 1) + min;
         return randomValue;
     }
 
