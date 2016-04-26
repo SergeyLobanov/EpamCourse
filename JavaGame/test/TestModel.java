@@ -43,9 +43,9 @@ public class TestModel {
 
     @Test
     public void testSetMaxValue() throws Exception {
-        model.setMaxValue(73);
+        model.setMaxValue(77);
         int highBoundary = model.getMaxValue();
-        assertEquals(72, highBoundary);
+        assertEquals(76, highBoundary);
     }
 
 }
