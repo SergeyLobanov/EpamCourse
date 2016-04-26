@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class Controller {
     // The Constants
+    public static final int RAND_MIN = 0;
     public static final int RAND_MAX = 100;
     // Constructor
     Model model;

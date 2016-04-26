@@ -11,19 +11,23 @@ import java.util.Random;
  */
 public class Model {
     private int randomValue;
-    private int minValue = 0;
+    private int minValue = Controller.RAND_MIN;
     private int maxValue = Controller.RAND_MAX;
     private List<Integer> userAttempts;
 
     // The Program logic
     public int rand() {
-        return rand(0, Controller.RAND_MAX);
+        return rand(Controller.RAND_MIN, Controller.RAND_MAX);
     }
 
     public int rand(int min, int max) {
         Random random = new Random();
         userAttempts = new LinkedList<>();
+        setMinValue(min);
+        setMaxValue(max);
+
         randomValue = random.nextInt(max - min + 1) + min;
+
         return randomValue;
     }
 
