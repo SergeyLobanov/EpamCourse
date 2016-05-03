@@ -9,9 +9,6 @@ import java.util.Scanner;
  * Created by Сергей on 23.04.2016.
  */
 public class Controller {
-    // The Constants
-    public static final int RAND_MIN = 0;
-    public static final int RAND_MAX = 100;
     // Constructor
     Model model;
     View view;
@@ -30,8 +27,7 @@ public class Controller {
         Scanner sc = new Scanner(System.in);
         model.addAttempt(enterAssumption(sc));
 
-        while (model.getRandomValue() != model.getLastAttempt()) {
-            compareWithRandom();
+        while (!isEqualsRandom()) {
             view.printMessageAndAttempts(View.USER_VARIANTS, model.getUserAttempts());
             model.addAttempt(enterAssumption(sc));
         }
@@ -39,15 +35,19 @@ public class Controller {
         endOfGame();
     }
 
-    public void compareWithRandom() {
+    public boolean isEqualsRandom() {
         if (model.getLastAttempt() < model.getRandomValue()) {
             view.printMessage(View.LESS_THAN_RANDOM);
             model.setMinValue(model.getLastAttempt());
-        }
-        else if (model.getLastAttempt() > model.getRandomValue()){
+            return false;
+        } else if (model.getLastAttempt() > model.getRandomValue()){
             view.printMessage(View.MORE_THAN_RANDOM);
             model.setMaxValue(model.getLastAttempt());
+            return false;
+        } else {
+            return true;
         }
+
     }
 
     public void endOfGame() {
