@@ -41,34 +41,34 @@ public class Controller {
 
     // The Work method
     public void notebookWork(){
+        Scanner sc = new Scanner(System.in);
 
         model.createNotebook();
         view.printMessage(View.APP_TITLE);
-        String surname = enterStringByPattern(REGEX_NAME, View.NAME);
-        String name = enterStringByPattern(REGEX_NAME, View.SURNAME);
-        String middleName = enterStringByPattern(REGEX_NAME, View.MIDDLE_NAME);
-        String nickname = enterStringByPattern(REGEX_NICKNAME, View.NICKNAME);
-        String comment = enterStringByPattern(REGEX_COMMENT, View.COMMENT);
+        String surname = enterStringByPattern(sc, REGEX_NAME, View.NAME);
+        String name = enterStringByPattern(sc, REGEX_NAME, View.SURNAME);
+        String middleName = enterStringByPattern(sc, REGEX_NAME, View.MIDDLE_NAME);
+        String nickname = enterStringByPattern(sc, REGEX_NICKNAME, View.NICKNAME);
+        String comment = enterStringByPattern(sc, REGEX_COMMENT, View.COMMENT);
         SubscriberGroup group =
-                SubscriberGroup.getName(Integer.valueOf(enterStringByPattern(REGEX_GROUP, View.GROUP)));
-        String homeNumber = enterStringByPattern(REGEX_HOME_PHONE, View.HOME_PHONE);
-        String mobileNumber = enterStringByPattern(REGEX_MOBILE_PHONE, View.MOBILE_NUMBER);
-        String email = enterStringByPattern(REGEX_MAIL, View.EMAIL);
-        String skype = enterStringByPattern(REGEX_SKYPE, View.SKYPE);
-        String addressIndex = enterStringByPattern(REGEX_INDEX, View.INDEX);
-        String city = enterStringByPattern(REGEX_NAME, View.CITY);
-        String street = enterStringByPattern(REGEX_NAME, View.STREET);
-        String houseNumber = enterStringByPattern(REGEX_HOUSE_NUMBER, View.HOUSE_NUMBER);
-        String apartmentNumber = enterStringByPattern(REGEX_APARTMENT_NUMBER, View.APARTMENT);
-        String creationDate = enterStringByPattern(REGEX_DATE, View.DATE);
-        String lastChangeDate = enterStringByPattern(REGEX_DATE, View.DATE);
+                SubscriberGroup.getName(Integer.valueOf(enterStringByPattern(sc, REGEX_GROUP, View.GROUP)));
+        String homeNumber = enterStringByPattern(sc, REGEX_HOME_PHONE, View.HOME_PHONE);
+        String mobileNumber = enterStringByPattern(sc, REGEX_MOBILE_PHONE, View.MOBILE_NUMBER);
+        String email = enterStringByPattern(sc, REGEX_MAIL, View.EMAIL);
+        String skype = enterStringByPattern(sc, REGEX_SKYPE, View.SKYPE);
+        String addressIndex = enterStringByPattern(sc, REGEX_INDEX, View.INDEX);
+        String city = enterStringByPattern(sc, REGEX_NAME, View.CITY);
+        String street = enterStringByPattern(sc, REGEX_NAME, View.STREET);
+        String houseNumber = enterStringByPattern(sc, REGEX_HOUSE_NUMBER, View.HOUSE_NUMBER);
+        String apartmentNumber = enterStringByPattern(sc, REGEX_APARTMENT_NUMBER, View.APARTMENT);
+        String creationDate = enterStringByPattern(sc, REGEX_DATE, View.DATE);
+        String lastChangeDate = enterStringByPattern(sc, REGEX_DATE, View.DATE);
         model.createNote(surname, name, middleName, nickname, comment, group,
                 homeNumber, mobileNumber, email, skype, addressIndex, city, street,
                 houseNumber, apartmentNumber, creationDate, lastChangeDate);
     }
 
-    public String enterStringByPattern(String pattern, String dataType) {
-        Scanner sc = new Scanner(System.in);
+    public String enterStringByPattern(Scanner sc, String pattern, String dataType) {
         view.printMessage(View.INPUT_DATA, dataType);
         String temp = sc.next();
 
