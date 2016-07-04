@@ -31,7 +31,7 @@ public class CPUProcess extends Thread {
     @Override
     public void run() {
         try {
-            while(true) {
+            while(!Thread.currentThread().isInterrupted()) {
                 long serveTime = (long)(lowTimeValue + (highTimeValue - lowTimeValue + 1)
                         * Math.random());//random time number between low and high values
                 Process process = new Process();
@@ -43,9 +43,7 @@ public class CPUProcess extends Thread {
                     counterOfDestroyedProcesses++;
                 }
                 //System.out.println("proc k " + k++);
-                if (!Thread.currentThread().isInterrupted()) {
-                    sleep(serveTime);
-                }
+                sleep(serveTime);
             }
         } catch (InterruptedException ie) {
             System.out.println("finished");

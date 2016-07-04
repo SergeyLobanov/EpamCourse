@@ -30,7 +30,7 @@ public class CPU extends Thread {
     public void run() {
         try {
             int serveCounter = 1;
-            while(true) {
+            while(!Thread.currentThread().isInterrupted()) {
                 long serveTime = (long) (lowTimeValue + (highTimeValue - lowTimeValue + 1) * Math.random());
                 if (serveCounter % fromFirstQueueN != 0) {
                     firstQueue.pop();
@@ -40,9 +40,7 @@ public class CPU extends Thread {
                 serveCounter++;
                 //System.out.println("cpu k " + serveCounter);
                 secondQueue.checkSize();
-                if (!Thread.currentThread().isInterrupted()) {
-                    sleep(serveTime);
-                }
+                sleep(serveTime);
             }
         } catch (InterruptedException ie) {
             System.out.println("finished");
