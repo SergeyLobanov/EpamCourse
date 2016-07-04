@@ -30,24 +30,26 @@ public class CPUProcess extends Thread {
 
     @Override
     public void run() {
-        int i = 30;
-        int k = 0;
         try {
-            //while(true) {
-            while(k++ < i) {
-                long serveTime = 200;//todo:(long)(lowTimeValue + (highTimeValue - lowTimeValue + 1) * Math.random());
-                sleep(serveTime);
+            while(true) {
+                long serveTime = (long)(lowTimeValue + (highTimeValue - lowTimeValue + 1)
+                        * Math.random());//random time number between low and high values
+                Process process = new Process();
+                counterOfGeneratedProcesses++;
                 if (cpuQueue.getSize() < cpuQueue.getMaxSize()) {
-                    cpuQueue.push(new String(""+k)); //todo: create process
-                    counterOfGeneratedProcesses++;
+                    cpuQueue.push(process);
                 } else {
-                    //todo: destroy process
+                    process = null;
                     counterOfDestroyedProcesses++;
                 }
-                System.out.println("proc k " + k);
+                //System.out.println("proc k " + k++);
+                if (!Thread.currentThread().isInterrupted()) {
+                    sleep(serveTime);
+                }
             }
         } catch (InterruptedException ie) {
-            ie.printStackTrace();
+            System.out.println("finished");
+            //ie.printStackTrace();
         }
     }
 

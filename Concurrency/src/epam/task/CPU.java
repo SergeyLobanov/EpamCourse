@@ -28,27 +28,27 @@ public class CPU extends Thread {
 
     @Override
     public void run() {
-        int i = 20;
-        int k = 0;
         try {
-            //while(true) {
             int serveCounter = 1;
-            while(k++ < i) {
-                long serveTime = 300;//todo:(long)(lowTimeValue + (highTimeValue - lowTimeValue + 1) * Math.random());
-                sleep(serveTime);
+            while(true) {
+                long serveTime = (long) (lowTimeValue + (highTimeValue - lowTimeValue + 1) * Math.random());
                 if (serveCounter % fromFirstQueueN != 0) {
                     firstQueue.pop();
                 } else {
                     secondQueue.pop();
                 }
-                serveCounter++;//todo; unsafe
-                System.out.println("cpu k " + k);
+                serveCounter++;
+                //System.out.println("cpu k " + serveCounter);
                 secondQueue.checkSize();
+                if (!Thread.currentThread().isInterrupted()) {
+                    sleep(serveTime);
+                }
             }
         } catch (InterruptedException ie) {
-            ie.printStackTrace();
+            System.out.println("finished");
+            //ie.printStackTrace();
         }
-    }
+        }
 
     public void setFirstQueue(CPUQueue firstQueue) {
         this.firstQueue = firstQueue;
